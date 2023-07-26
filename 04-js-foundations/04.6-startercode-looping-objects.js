@@ -42,8 +42,8 @@ player.age++
 
 // - VARIABLES GO IN BRACKET NOTATION - WITH NO QUOTES
 const x = "awards"
-console.log(player['x']) //same as player.x --> undefined
-console.log(player[x])
+// console.log(player['x']) //same as player.x --> undefined
+// console.log(player[x])
 
 // - LITERAL PROPERTY NAMES GO IN DOT NOTATION OR BRACKET NOTATION WITH QUOTES
 
@@ -51,17 +51,40 @@ console.log(player[x])
 
 // - FOR-IN LOOP TO LOOP OVER OBJECTS -
 for(let key in player){
-  console.log("key is: ", key)
-  console.log("value is: ", player[key])
+  // console.log("key is: ", key)
+  // console.log("value is: ", player[key])
 }
 
 
 // - OBJECT.KEYS() AND OBJECT.VALUES() GIVE US BACK ARRAYS THAT WE CAN LOOP THROUGH KEYS AND VALUES WITH
+const keysOnly = Object.keys(player);
+const valuesOnly = Object.values(player);
+// console.log(keysOnly)
+// console.log(valuesOnly)
+
 
 
 // - FOR OF LOOP TO LOOP OVER ARRAYS
+// for(let i = 0; i<keysOnly.length; i++){
+//   const key = keysOnly[i];
+//   const value = player[key];
+//   console.log(key, value)
+// }
 
 
+for(let element of keysOnly){
+  // console.log(element)
+}
 
 
+const nums = [2,3,6,8,10]
 
+for(let i = 0; i<nums.length; i++){
+  const element = nums[i]
+  console.log(element)
+  if(element === 8){
+    nums[i] = "Kobe"
+  }
+}
+
+console.log(nums)

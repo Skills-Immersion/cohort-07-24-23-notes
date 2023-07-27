@@ -5,6 +5,7 @@ let player1 = {
     firstName: "Lebron",
     lastName: "James",
     points: 32000,
+    jerseryNumber: 6
     teams: ["Cavs", "Heat"]
   }
 
@@ -14,7 +15,7 @@ AND IT WILL RETURN A NEW OBJECT LIKE THIS CONTAINING THE TEAM NAME ADDED TO THE 
 {
   fullName: 'Lebron James',
   points: 32000,
-  teams: [ 'Cavs', 'Heat', 'Lakers' ]
+  teams: [ 'Cavs', 'Heat', 'Celtics' ]
 }
 
 
@@ -36,9 +37,18 @@ const player2 = {
 }
 
 function updatePlayer(teamName, playerObj) {
-	//can't use player.points, or player.jerseyNumber in the answer
+	//can't use player.points, or player.jerseyNumber in the answer (hint: destructure the info you need from playerObj)
+  const {firstName,lastName,points,teams} = playerObj;
+  teams.push(teamName)
+  const result = {
+    fullName: `${firstName} ${lastName}`,
+    points,
+    teams
+  }
+  return result;
 }
 
+// console.log(updatePlayer("Bulls", player1))
 
 /* 
 
@@ -46,11 +56,9 @@ WRITE A FUNCTION NAMED JOINTEAMS() THAT WILL TAKE TWO DIFFERENT PLAYER OBJECTS A
 */
 
 function joinTeams(playerA, playerB) {
-    
+  const {teams} = playerA;
+  const {teams:teamsB} = playerB;
+  return [...teams, ...teamsB]
 }
-
-
-
-
 
 console.log(joinTeams(player1, player2))

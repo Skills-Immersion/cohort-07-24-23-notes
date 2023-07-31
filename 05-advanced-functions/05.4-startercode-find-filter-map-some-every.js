@@ -4,7 +4,7 @@
   -RETURNS: FOUND ELEMENT OR UNDEFINED
   -CALLBACK FUNCTION DETAILS:
     - CB PARAMETERS: ELEMENT AND INDEX
-    - CB RULE: RETURN A CONDITION - the callback function has to return a condition. The .find() method will LOOP and return the FIRST ELEMENT that the condition evaluates true for or undefined if the condition is falsy for every element
+    - CB RULE: RETURN A CONDITION - the callback function has to return a condition. The .find() method will LOOP and return the FIRST ELEMENT that the condition evaluates true for (cb function returns true for) or undefined if the condition is falsy for every element
 
 
 .filter() -> loop through the array to create a new array with elements that match a condition.
@@ -81,6 +81,16 @@ const employees = [
     },
     languages: ["Javascript", "Java", "Python"],
   },
+  {
+    name: "Larry David",
+    salary: 10000,
+    company: {
+      name: "HBO",
+      city: "Los Angeles",
+      state: "California",
+    },
+    languages: ["Javascript", "Java", "Python"],
+  }
 ];
 
 //find an employee who is named "Larry David"
@@ -92,7 +102,11 @@ function findEmployeeByName(employees=[], name="") {
   if(result === undefined) return null;
   return result;
 }
+/* 
+[]
 
+
+*/
 // console.log(findEmployeeByName(employees, "Larry David"))
 
 
@@ -149,8 +163,8 @@ function areAllEmployeesGettingPaidGivenAmount(employees=[], amount=0) {
   return result;
 }
 
-console.log(areAllEmployeesGettingPaidGivenAmount(employees, 10000))
-console.log(areAllEmployeesGettingPaidGivenAmount(employees, 100000))
+// console.log(areAllEmployeesGettingPaidGivenAmount(employees, 10000))
+// console.log(areAllEmployeesGettingPaidGivenAmount(employees, 100000))
 
 
 

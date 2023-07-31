@@ -13,13 +13,26 @@
 
 const numbers = [768, 1004.2, 433.1];
 
-function sumNumsForEachWay(nums){
-
+function sumNumsForEachWay(nums=[]){
+  let total = 0;
+  nums.forEach((elem, idx)=>{
+    total += elem;
+  })
+  return total;
 }
 
 // console.log(sumNumsForEachWay(numbers))
 
 function sumNums(nums){
+  const total = nums.reduce((accumulator,element,idx)=>{
+    //whatever you return in the cb function for .reduce() is what we are setting accumulator to for the next iteration
+    //1. accumulate to the accumulator
+    accumulator += element;
+    //2. return the accumulator
+    return accumulator
+  },0)
+
+  return total;
 
 }
 
@@ -56,8 +69,13 @@ const movies = [
 
 /* ADD UP ALL THE VIEWS FROM ALL THE MOVIE OBJECTS IN THE MOVIES ARRAY */
 
-function totalViews(movies){
+function totalViews(movies=[]){
+  const total = movies.reduce((acc,element,idx)=>{
+    acc += element.views;
+    return acc;
+  },0)
 
+  return total;
 }
 
 // console.log(totalViews(movies))
@@ -73,13 +91,30 @@ EXAMPLE OUTPUT:
   'Forrest Gump': 'Universal Studios'
 }
 */
+function movieAndProducerNameForEach(movies=[]){
+  const result = {};
 
-function movieAndProducerName(movies){
-
+  movies.forEach((element)=>{
+    result[element.title] = element.producer.name;
+  })
+  return result;
 }
 
+// console.log(movieAndProducerNameForEach(movies))
 
-console.log(movieAndProducerName(movies));
+
+function movieAndProducerName(movies=[]){
+  const result = movies.reduce((acc,element,idx)=>{
+    //1. accumulate to the accumulator
+    acc[element.title] = element.producer.name;
+    //2. return accumulator
+    return acc;
+  },{})
+
+  return result;
+}
+
+// console.log(movieAndProducerName(movies));
 
 /* ADVANCED PROBLEM- HINT FOR YOUR ASSESSMENT:  GIVEN AN ARRAY OF MOVIE OBJECTS, RETURN AN OBJECT WHERE EACH KEY IS THE PRODUCER NAME, AND EACH VALUE IS AN ARRAY OF MOVIES ASSOCIATED WITH THAT PRODUCER NAME 
 
@@ -96,7 +131,24 @@ EXAMPLE OUTPUT:
 
 */
 
-function movieByProducer(movies){
+function movieByProducer(movies=[]){
+  const result = movies.reduce((acc,element,idx)=>{
+    if(acc[element.producer.name] === undefined){
+      acc[element.producer.name] = [element]
+    }else{
+      acc[element.producer.name].push(element);
+    }
+    return acc;
+  },{})
+  return result
 }
 
-// console.log(movieByProducer(movies))
+/* 
+acc = {
+  "Universal studios": [{Austin Powers}, {Forrest Gump} ],
+  "Disney": [{Finding Nemo}]
+
+}
+*/
+
+console.log(movieByProducer(movies))

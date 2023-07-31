@@ -19,15 +19,21 @@
 const numbers = [23,4,12,77,-3,-5,1]
 
 //ASCENDING (LEAST TO GREATEST)
-function sortAscending(nums){
-
+function sortAscending(nums=[]){
+  nums.sort((elemA,elemB)=>{
+    return elemA - elemB;
+  })
+  return nums;
 }
 
 // console.log(sortAscending(numbers))
 
 //DESCENDING
 function sortDescending(nums){
-
+  nums.sort((elemA,elemB)=>{
+    return elemB - elemA;
+  })
+  return nums;
 }
 
 // console.log(sortDescending(numbers))
@@ -41,11 +47,27 @@ const parks = [
     { name: "Indiana Dunes", rating: 4.1 },
   ];
 
+parks.sort((elemA,elemB)=>{
+  return elemB.rating - elemA.rating;
+})
+// console.log(parks)
 
 
 /* EXAMPLE 3: SORTING STRINGS */
+parks.sort((elemA,elemB)=>{
+  if(elemA.name.toLowerCase() < elemB.name.toLowerCase()){
+    return -1
+  }else{
+    return 1;
+  }
+})
+
+
 
 
 /* EXAMPLE 4: SORT STRINGS BY LENGTH */
+parks.sort((elemA,elemB)=>{
+  return elemB.name.length - elemA.name.length;
+})
 
-
+// console.log(parks)

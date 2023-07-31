@@ -9,7 +9,7 @@
 
 .filter() -> loop through the array to create a new array with elements that match a condition.
   -INPUT: CALLBACK FUNCTION
-  -RETURNS: NEW ARRAY WITH MATCHING ELEMENTS
+  -RETURNS: NEW ARRAY WITH MATCHING ELEMENTS or [] if no matching elements
   -CALLBACK FUNCTION DETAILS:
     -CB PARAMETERS: ELEMENT AND INDEX
     -CB RULE: RETURN A CONDITION - the callback function has to return a condition. The .filter() method will create a new array with elements that the condition evaluates true for.
@@ -84,26 +84,107 @@ const employees = [
 ];
 
 //find an employee who is named "Larry David"
-function findEmployeeByName(employees, name) {}
+function findEmployeeByName(employees=[], name="") {
+  const result = employees.find((employeeObj,idx)=>{
+    //callback rule
+    return employeeObj.name === name;
+  })
+  if(result === undefined) return null;
+  return result;
+}
+
+// console.log(findEmployeeByName(employees, "Larry David"))
+
 
 //get all the employees who are making over a given amount
-function findHighEarners(employees, amount) {}
+function findHighEarners(employees=[], amount=0) {
+  const result = employees.filter((employeeObj, idx)=>{
+    return employeeObj.salary > amount;
+  })
+  return result;
+}
+
+const findHighEarners2 = (employees=[], amount=0) =>  employees.filter(employeeObj=> employeeObj.salary > amount)
+
+/* 
+[{lj}, {SD}]
+*/
+
+// console.log(findHighEarners2(employees, 100000))
 
 //give back a new array containing only the company names and city for each employee in the given list
-function findCompanyNamesAndCity(employees) {}
+function getCompanyNamesAndCity(employees=[]) {
+  const result = employees.map((employeeObj,idx)=>{
+    return {
+      companyName: employeeObj.company.name,
+      companyCity: employeeObj.company.city
+    }
+  })
+  return result;
+}
 
+// console.log(getCompanyNamesAndCity(employees))
+
+/* 
+[
+
+]
+
+*/
 //use .some() to check if any employees are from a company with the name "Comedy Central"
-function doesCompanyHaveEmployee(employees, companyName) {}
+function doesCompanyHaveEmployee(employees = [], companyName="") {
+  const result = employees.some((employeeObj,idx)=>{
+    return employeeObj.company.name === companyName;
+  })
+  return result;
+}
+
+// console.log(doesCompanyHaveEmployee(employees, "Comedy Central"))
 
 //use .every() to indicate whether every employee is making over a certain salary
-function areAllEmployeesGettingPaidGivenAmount(employees, amount) {}
+function areAllEmployeesGettingPaidGivenAmount(employees=[], amount=0) {
+  const result = employees.every((employeeObj,idx)=>{
+    return employeeObj.salary > amount
+  })
+  return result;
+}
+
+console.log(areAllEmployeesGettingPaidGivenAmount(employees, 10000))
+console.log(areAllEmployeesGettingPaidGivenAmount(employees, 100000))
 
 
 
 
 
+//GIVE BACK A NEW ARRAY CONTAINING ONLY THE COMPANY NAMES AND CITY FOR EACH EMPLOYEE IN THE GIVEN LIST WHO HAVE A SALARY GREATER THAN OR EQUAL TO A GIVEN AMOUNT
 
 /* ADVANCED: HOW TO COMBINE THESE METHODS FOR MORE COMPLEX PROBLEMS */
+
+function getHighPayingCompanies(employees = [], amount = 0){
+  //filter first to get only employees making over a certain amount
+  const highPaidEmployees = employees.filter((employeeObj, idx)=>{
+    return employeeObj.salary > amount;
+  })
+
+  const highPaidCompanies = highPaidEmployees.map((employeeObj,idx)=>{
+    //name and city for each employeObj's company
+    return {
+      companyName: employeeObj.company.name,
+      companyCity: employeeObj.company.city
+    }
+  })
+
+  return highPaidCompanies
+}
+
+// console.log(getHighPayingCompanies(employees, 100000))
+
+
+const getHighPayingCompanies2 = (employees = [], amount = 0)=> employees.filter(({salary}, idx)=> salary > amount).map(({company:{name,city}},idx)=> ({name,city}))
+
+
+// console.log(getHighPayingCompanies2(employees, 100000))
+
 
 /* USE FILTER() AND MAP() TO GIVE BACK A NEW ARRAY CONTAINING ONLY THE COMPANY NAMES AND CITY FOR EACH EMPLOYEE IN THE GIVEN LIST WHO HAVE A SALARY GREATER THAN OR EQUAL TO A GIVEN AMOUNT
 

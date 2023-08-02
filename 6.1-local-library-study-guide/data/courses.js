@@ -18,10 +18,6 @@ const courses = [
                 onPace: false
             },
             {
-                studentId: 1,
-                onPace: true
-            },
-            {
                 studentId: 4,
                 onPace: true
             },
@@ -94,7 +90,7 @@ const courses = [
     {
         id: 5,
         name: "How to be Hip 101",
-        category: "Psychology",
+        category: "Finance",
         instructorId: 4,
         roster: [
             {

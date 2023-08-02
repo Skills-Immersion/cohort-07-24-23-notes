@@ -250,35 +250,88 @@ function getTotalNumberOfClassesEnrolledInAdvanced(student={}, courses=[]) {
     return count;
 }
 
-let student1 = {
-    id: 1,
+let student1 =  {
+    id: 4,
     name: {
-        first: "Bugs",
-        last: "Bunny",
-    },
-};
+        first: "Spongebob",
+        last: "Squarepants"
+    }
+}
 
-console.log(getTotalNumberOfClassesEnrolledInAdvanced(student1, courses));
+// console.log(getTotalNumberOfClassesEnrolledInAdvanced(student1, courses));
 
 /* 
-10- Given a student object, an array of course objects and an array of authors objects-> give back all the course objects including the instructor information embedded into the course object for the courses the student is enrolled in
-
-
+10- Given a student object, an array of course objects and an array of instructors objects-> give back all the course objects including the instructor information embedded into the course object for the courses the student is enrolled in
 
 */
 
-function getCoursesStudentEnrolledIn(student, courses, instructors) {
-    
+
+function getCoursesStudentEnrolledIn(student={}, courses=[], instructors=[]) {
+    //have a result to put all coursesThatStudentIsEnrolledIn into
+    const result = [];
+    //look at given students id - var
+    const {id} = student;
+    //look at each courseObj in courses[]. forEach courseObject do:
+    for(let courseObj of courses){
+        //look at the roster - var
+        const {roster} = courseObj;
+        //for each element(rosterObj) in roster do:
+        for(let rosterObj of roster){
+            //check if the rosterObj.studentId === givenStudentsId
+            if(rosterObj.studentId === id){
+                //embed the instructor info into the courseObj by first getting the instructorId of the current course - var
+                const {instructorId} = courseObj;
+                //look in instructors array to find an instructor whose id matches the current courseObj's instructorId
+                const foundInstructor = instructors.find((instructorObj)=>{
+                    return instructorObj.id === instructorId;
+                })
+                //embed the found instructor to the courseObj
+                courseObj.instructor = foundInstructor;
+                //if so - add this courseObj to the result
+                result.push(courseObj)
+                //break out of roster loop
+                break;
+            }
+        }
+        
+    }
+    return result;
 }
 
-// console.log(getCoursesStudentEnrolledIn(student1, courses, instructors));
+
+function getCoursesStudentEnrolledInAdvanced(student={}, courses=[], instructors=[]) {
+    //look at given students id - var
+    const {id} = student;
+    //have a result to put all coursesThatStudentIsEnrolledIn into
+    const result = courses.filter((courseObj)=>{
+        //look at the roster - var
+        const {roster} = courseObj;
+        //for each element(rosterObj) in roster do:
+        const isStudentThere = roster.some((rosterObj)=>{
+            return rosterObj.studentId === id
+        })
+        if(isStudentThere === true){
+            const {instructorId} = courseObj;
+            //look in instructors array to find an instructor whose id matches the current courseObj's instructorId
+            const foundInstructor = findInstructorById(instructors,instructorId)
+            //embed the found instructor to the courseObj
+            courseObj.instructor = foundInstructor;
+        }
+        return isStudentThere
+    })
+    return result;
+}
+
+// console.log(getCoursesStudentEnrolledInAdvanced(student1, courses, instructors))
 
 /*
 11. Get count of courses who have at least on student not onPace- similar to getBooksBorrowedCount(books)
 */
 
-function getCoursesNotOnPaceCount(courses) {
-    
+function getCoursesNotOnPaceCount(courses=[]) {
+    //call the partition function as a helper function
+    const [,notOnPaceCourses] = partitionCoursesByStudentProgress(courses); //[[onPacecourses],[notOnPaceCourses]]
+    return notOnPaceCourses.length;
 }
 
 // console.log(getCoursesNotOnPaceCount(courses));
@@ -292,13 +345,49 @@ function getCoursesNotOnPaceCount(courses) {
     { name: "Psychology", count: 2 },
 ]
 
+
+result = [
+
+]
+
+lookup = { 
+    'Software Engineering': 3, 
+    Psychology: 3, 
+    Finance: 1 
+}
+
+
 */
 
 const getMostCommonCategories = (courses) => {
-    
+    //have a lookup object {}
+    const lookup = {};
+    //loop through courses array. for each course do:
+    courses.forEach(courseObj=>{
+        //look at the category
+        const {category} = courseObj;
+        //check if the category is in the lookup. If its not in lookup then:
+        if(lookup[category] === undefined){
+            //create a key for that category and set the value to be 1
+            lookup[category] = 1;
+        }else{
+            //if it is in lookup, then increment lookup[category] by 1
+            lookup[category]++
+        }
+    })
+    const result = []
+    for(let key in lookup){
+        const obj =  { name: key, count: lookup[key]}
+        result.push(obj);
+    }
+
+    result.sort((elemA,elemB)=>{
+        return elemB.count - elemA.count
+    })
+    return result.slice(0,2);
 };
 
-// console.log(getMostCommonCategories(courses));
+console.log(getMostCommonCategories(courses));
 
 /* 
 13. Get most popular courses- find the top 3 largest courses based on roster size

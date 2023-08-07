@@ -20,6 +20,7 @@ describe("getAverageRating()",()=>{
     //call the function with a dataset
     const actual = getAverageRating(artists)
     //assert that the functions output will equal our expected output (8.36)
+    expect(actual).to.be.a("number")
     expect(actual).to.equal(8.36)
   })
 
@@ -31,13 +32,13 @@ describe("getAverageRating()",()=>{
     expect(actual).to.equal(null)
   })
 
-  //the output should be a number data type
-  it("the output should be a number data type", ()=>{
-    const actual = getAverageRating(artists);
+  // //the output should be a number data type
+  // it("the output should be a number data type", ()=>{
+  //   const actual = getAverageRating(artists);
 
-    expect(actual).to.be.a("number")
-    // expect([]).to.be.a("array")
-  })
+  //   expect(actual).to.be.a("number")
+  //   // expect([]).to.be.a("array")
+  // })
 })
 
 describe("getLowRatedArtists()",()=>{
@@ -53,6 +54,7 @@ describe("getLowRatedArtists()",()=>{
     ]
     //assertion
     expect(actual).to.eql(expected)
+
   })
 
   //it returns null if no artists in the input dataset

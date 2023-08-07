@@ -1,5 +1,5 @@
 const {getLowRatedArtists, getAverageRating, partitionArtistsByRating} = require("../src/main");
-const expect = require("chai").expect;
+// const expect = require("chai").expect;
 
 const artists = [
   { name: "Taylor Swift", rating: 9 },
@@ -20,8 +20,9 @@ describe("getAverageRating()",()=>{
     //call the function with a dataset
     const actual = getAverageRating(artists)
     //assert that the functions output will equal our expected output (8.36)
-    expect(actual).to.be.a("number")
-    expect(actual).to.equal(8.36)
+    // expect(actual).to.be.a("number")
+    expect(typeof actual).toEqual("number")
+    expect(actual).toEqual(8.36)
   })
 
   //edge case- getAverageRating should return null if there are no elements in the given array
@@ -29,7 +30,7 @@ describe("getAverageRating()",()=>{
     //call the function and store its output in a variable called actual
     const actual = getAverageRating([]);
     //assert the actual with expected
-    expect(actual).to.equal(null)
+    expect(actual).toEqual(null)
   })
 
   // //the output should be a number data type
@@ -53,7 +54,7 @@ describe("getLowRatedArtists()",()=>{
       },
     ]
     //assertion
-    expect(actual).to.eql(expected)
+    expect(actual).toEqual(expected)
 
   })
 
@@ -61,7 +62,7 @@ describe("getLowRatedArtists()",()=>{
   it("it returns null if no artists in the input dataset", ()=>{
     const actual = getLowRatedArtists([]);
     // expect(actual).to.equal(null)
-    expect(actual).to.be.null;
+    expect(actual).toEqual(null)
 
   })
 })
@@ -88,14 +89,15 @@ describe("partitionArtistsByRating()", ()=>{
     const expected = [lowRated,highRated];
 
     // expect(actual).to.deep.equal(expected); //this also works for deep comparision of reference types
-    expect(actual).to.eql(expected);
-
+    expect(actual).toEqual(expected);
+    // expect(typeof actual).toBe("array")
+    expect(Array.isArray(actual)).toEqual(true)
   })
 
   it("will put all artists in first sub array if necessary", ()=>{
     const actual = partitionArtistsByRating(artists, 11)
     const expected = [artists,[]]
-    expect(actual).to.eql(expected);
+    expect(actual).toEqual(expected);
 
   })
 

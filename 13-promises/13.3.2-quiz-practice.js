@@ -11,6 +11,8 @@ function one(){
   console.log(`Your fortune is: ${fortune}`);
 }
 
+// one()
+
 
 //What will be the state of the promise below after 1,000 milliseconds?
 function two(){
@@ -19,14 +21,23 @@ function two(){
       resolve('Completed!');
     }, 100);
   });
-}
 
+  setTimeout(()=>{
+    console.log(promise)
+  },10)
+}
+//Pending, Fulfilled (resolved), Rejected
+// two()
 
 //What will be the state of the promise below after 1,000 milliseconds?
 function three(){
   const promise = new Promise((resolve, reject) => {
-    console.log('Completed!');
+    resolve("hello")
   });
 
   console.log(promise)
 }
+
+// three()
+
+

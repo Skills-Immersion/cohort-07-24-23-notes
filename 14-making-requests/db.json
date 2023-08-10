@@ -1,11 +1,11 @@
 {
   "players": [
     {
-      "id": "1",
-      "name": "Lebron James",
+      "name": "Lebron GOAT James",
       "team": "Lakers",
-      "number_championships": 4,
-      "state": "California"
+      "number_championships": 5,
+      "state": "California",
+      "id": "1"
     },
     {
       "id": "2",
@@ -36,18 +36,18 @@
       "state": "California"
     },
     {
-      "id": "6",
-      "name": "Charles Barkley",
-      "team": "Suns",
-      "number_championships": 0,
-      "state": "Arizona"
-    },
-    {
       "id": "7",
       "name": "Michael Jordan",
       "team": "Bulls",
       "number_championships": 6,
       "state": "Illinois"
+    },
+    {
+      "name": "Bugs Bunny",
+      "team": "Tune Squad",
+      "number_championships": 1,
+      "state": "California",
+      "id": "UIzTU1S"
     }
   ]
 }

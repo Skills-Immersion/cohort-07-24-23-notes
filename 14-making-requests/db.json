@@ -48,6 +48,13 @@
       "number_championships": 1,
       "state": "California",
       "id": "UIzTU1S"
+    },
+    {
+      "name": "Larry Legend Bird",
+      "team": "Bulls",
+      "number_championships": 4,
+      "state": "Illinois",
+      "id": "emT90tf"
     }
   ]
 }

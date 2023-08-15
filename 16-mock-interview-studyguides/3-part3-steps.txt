@@ -1,0 +1,7 @@
+1. Find the api endpoint, test it on postman. Make sure you can find the data that the question is asking you to retrieve
+2. Determine if the api endpoint is static or dynamic. Dynamic means the url can vary depending on the input given to the function. Eg: https://api.coingecko.com/api/v3/coins/bitcoin <----Bitcoin can vary depending on the input
+3. Import axios if needed
+4. Write the function and include any necessary parameters (if any)
+5. Return the axios.get() call appropriately. Make sure the api endpoint is using the appropriate parameter (if any)
+6. Make sure you return the data they are asking for in the .then()
+7. Have a .catch() for any possible error handling

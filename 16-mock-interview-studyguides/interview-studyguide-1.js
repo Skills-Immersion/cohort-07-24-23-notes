@@ -14,7 +14,11 @@ The function should return the market_data object from the result of the API cal
 
 An example output would be
 
-getCoinMarketData('bitcoin') /* ->
+getCoinMarketData('bitcoin') 
+getCoinMarketData('ethereum')
+getCoinMarketData('dogecoin')
+
+/* ->
   
 {
     "current_price": {
@@ -82,3 +86,37 @@ getCoinMarketData('bitcoin') /* ->
 }, ...other keys related to market data
 
 */
+
+const axios = require("axios");
+const base_url = "https://api.coingecko.com/api/v3/coins"
+
+function getCoinMarketData(coinName=""){
+  return axios.get(`${base_url}/${coinName}`)
+    .then((response)=>{
+      // console.log(response.data.market_data)
+      return response.data.market_data;
+    })
+    .catch((err)=>{
+      // console.log(err.message);
+      return err.message;
+    })
+}
+
+async function getCoinMarketData2(coinName=""){
+  try{
+    // const {data:{market_data}} = await axios.get(`${base_url}/${coinName}`);
+    const response = await axios.get(`${base_url}/${coinName}`);
+    return response.data.market_data;
+  }catch(err){
+    console.log(err.message);
+    return err.message;
+  }
+}
+
+getCoinMarketData2("ethereum")
+.then((output)=>{
+  console.log("output is", output);
+})
+// console.log(result)
+
+

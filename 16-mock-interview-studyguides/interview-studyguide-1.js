@@ -113,10 +113,13 @@ async function getCoinMarketData2(coinName=""){
   }
 }
 
-getCoinMarketData2("ethereum")
-.then((output)=>{
-  console.log("output is", output);
-})
+// getCoinMarketData2("ethereum")
+// .then((output)=>{
+//   console.log("output is", output);
+// })
 // console.log(result)
+
+
+
 
 

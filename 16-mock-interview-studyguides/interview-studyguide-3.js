@@ -12,6 +12,4 @@ Return an array that has formatted each coin to have this shape (values depend o
     "price_change_percentage_24h": -0.29773
 }
 
-
-
 */

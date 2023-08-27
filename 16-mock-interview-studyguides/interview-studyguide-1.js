@@ -122,4 +122,60 @@ async function getCoinMarketData2(coinName=""){
 
 
 
+function getAllCoins() {
+  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
+  return axios.get(url)
+    .then(response => {
+      const coinData = response.data;
+
+      const formattedCoins = coinData.map(coin => {
+        return {
+          name: coin.name,
+          current_price: coin.current_price,
+          price_change_percentage_24h: coin.price_change_percentage_24h
+        };
+      });
+
+      return formattedCoins;
+    })
+    .catch(error => {
+      console.error("Error fetching data from the API:", error);
+      return [];
+    });
+}
+
+
+// getAllCoins().then(console.log)
+
+function getPokemonData(pokemonName) {
+  const baseUrl = "https://pokeapi.co/api/v2/pokemon/";
+
+  return axios.get(`${baseUrl}${pokemonName}`)
+    .then(response => {
+      const data = response.data;
+
+      const abilities = data.abilities.map(ability => {
+        return {
+          abilityName: ability.ability.name,
+          isHidden: ability.is_hidden
+        };
+      });
+
+      const formattedData = {
+        name: data.name,
+        abilities: abilities,
+        height: data.height,
+        base_experience: data.base_experience
+      };
+
+      return formattedData;
+    })
+    .catch(error => {
+      console.error("Error fetching data from the API:", error);
+      return null;
+    });
+  }
+
+
+  getPokemonData("pikachu").then(console.log)

@@ -31,4 +31,6 @@ function catchEmAll(pokemonName) {
   
 }
 
-catchEmAll("pikachu")
+// catchEmAll("pikachu")
+
+

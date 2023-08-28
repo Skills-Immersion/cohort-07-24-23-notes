@@ -1,0 +1,37 @@
+section {
+  background-color: gray;
+  /* padding: 10px; */
+}
+
+/* h2{
+  color: pink;
+}
+
+#second{
+  color: red;
+  padding: 20px;
+  margin: 100px;
+} */
+
+.group {
+  border: 1px solid black;
+  background-color: aqua;
+  /* padding: 10px; */
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  /* flex-direction: column; */
+  /* flex-direction: row-reverse; */
+  /* flex-direction: column-reverse; */
+}
+
+.item {
+  border: 1px solid black;
+  background-color: chocolate;
+  /* margin-right: 10px; */
+  flex: 1;
+}
+
+.item-double{
+  flex: 2;
+}

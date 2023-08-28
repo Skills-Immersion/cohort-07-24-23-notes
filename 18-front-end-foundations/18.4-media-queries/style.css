@@ -1,0 +1,22 @@
+.intro {
+  background-color: aquamarine;
+  border: 1px solid black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.intro p {
+  border: 1px solid red;
+}
+
+
+@media all and (min-width: 750px){
+  /* *{
+    background-color: red;
+  } */
+  .intro{
+    flex-direction: row;
+  }
+
+}

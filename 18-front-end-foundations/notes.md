@@ -12,7 +12,7 @@
       - `<img>` (image)
     - Block (Elements that create line breaks and take up the line. Does not allow other elements to be next to it)
       - `<p>` (paragraph)
-      - `<div>` (generic block container)
+      - `<div>` (generic block container) and `<article>`,`<nav>`, `<header>`, `<section>`
       - `<p>` (paragraph)
       - `<h1>-<h6>` (headings)
       - `<ul>` (unordered list)

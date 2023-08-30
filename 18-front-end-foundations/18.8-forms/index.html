@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms</title>
+</head>
+<body>
+  <h1>Thai Food Ordering</h1>
+  <form action="">
+    <!-- Name -->
+    <div>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" placeholder="Your name here...">
+    </div>
+    <!-- Email -->
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email">
+    </div>
+    <!-- Restaurant location (choose one of three options)-->
+    <div>
+      <label for="location">Select restaurant location:</label>
+      <select id="location">
+        <option value="">Vancouver</option>
+        <option value="">Chicago</option>
+        <option value="">Philly</option>
+        <option value="">San Franscisco</option>
+        <option value="">Dallas</option>
+      </select>
+    </div>
+    <!-- Carry out or delivery? -->
+    <div>
+      <p>Please choose: </p>
+      <label for="carry_out">Carry Out:</label>
+      <input type="radio" id="carry_out" name="choice">
+      <label for="delivery">Delivery:</label>
+      <input type="radio" id="delivery" name = "choice">
+    </div>
+    <!-- Address -->
+    <div>
+      <label for="delivery_addy">Delivery Address:</label>
+      <input type="text" id="delivery_addy">
+    </div>
+    <!-- Payment -->
+    <div>
+      <label for="payment">Credit Card Number:</label>
+      <input type="text" id="payment">
+    </div>
+    <!-- Order -->
+    <div>
+      <h3>Our Menu</h3>
+      <div>
+        <label for="pad_thai">Pad Thai</label>
+        <input type="checkbox" name="" id="pad_thai">
+        <label for="">Quantity</label>
+        <input type="number" name="" id="" min="1" max="5">
+      </div>
+      <div>
+        <label for="pad_see_ew">Pad See Ew</label>
+        <input type="checkbox" name="" id="pad_see_ew">
+        <label for="">Quantity</label>
+        <input type="number" name="" id="">
+      </div>
+      <div>
+        <label for="pad_kee_mao">Pad Kee Mao</label>
+        <input type="checkbox" name="" id="pad_kee_mao">
+        <label for="">Quantity</label>
+        <input type="number" name="" id="">
+      </div>
+      <div>
+        <label for="basil_eggplant">Basil Eggplant</label>
+        <input type="checkbox" name="" id="basil_eggplant">
+        <label for="">Quantity</label>
+        <input type="number" name="" id="">
+      </div>
+    </div>
+    <!-- Special request -->
+    <div>
+      <label for="">Special Request</label>
+      <br>
+      <textarea name="" id="" cols="50" rows="10"></textarea>
+    </div>
+    <input type="submit" value="Order now!">
+  </form>
+</body>
+</html>

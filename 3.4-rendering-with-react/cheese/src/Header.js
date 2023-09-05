@@ -6,10 +6,10 @@
 import React from 'react';
 
 // the name of the prop, funFact, matches the name of the prop in App.js where we render the Header component
-function Header({ factAboutCheese }) {
+function Header({ factAboutCheese, someOtherString }) {
   return <header>
     <h1>Cheese!</h1>
-    <p>{factAboutCheese.toUpperCase()}</p>
+    <p>{factAboutCheese.toUpperCase()} {someOtherString}</p>
     <p>2 + 3 is {2 + 3}</p>
   </header>
 }

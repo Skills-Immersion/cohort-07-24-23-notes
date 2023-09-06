@@ -6,14 +6,14 @@ import Cheese from './Cheese';
 function App() {
   let factAboutCheese = 'cheese is the best';
   let templateLiteral = `${factAboutCheese}`
-  let cheeses = [
+  let cheesesArray = [
     { name: 'gruyere', imageUrl: "https://bovafoods.com/wp-content/uploads/2020/05/DAI292.jpg" },
     { name: 'cheddar', imageUrl: "https://i0.wp.com/homesteadersofamerica.com/wp-content/uploads/2022/01/How-to-Make-Cheddar-Cheese-17.jpg?resize=1024%2C683&ssl=1" },
     { name: 'parmesan', imageUrl: "https://vincentsmeatmarket.com/wp-content/uploads/2021/02/Grater-bottle-scaled.jpg" },
     { name: 'bleu', imageUrl: "https://cheese-etc.co.uk/wp-content/uploads/2020/02/shropshire-blue-cheese.jpeg" },
   ]
   // change this array into another array where I've transformed each of the elements
-  // let cheesesLIs = cheeses.map(ch => <li>{ch}</li>)
+  // let cheesesLIs = cheesesArray.map(ch => <li>{ch}</li>)
   return (
     <div>
       {/* how to render another component: import it at the top of the file and then write it as if it's an HTML element inside the HTML part of the file */}
@@ -24,7 +24,7 @@ function App() {
         <ul>
           {/* {cheesesLIs} */}
           {/* the key is something to uniquely identify each LI for React's sake */}
-          {cheeses.map(ch => <Cheese cheese={ch} key={ch.name} />)}
+          {cheesesArray.map(ch => <Cheese cheese={ch} key={ch.name} />)}
         </ul>
         <table>
           {/* tables contain a thead and a tbody */}
@@ -37,7 +37,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {cheeses.map(ch => <tr key={ch.name}>
+            {cheesesArray.map(ch => <tr key={ch.name}>
               <td>{ch.name}</td>
               <td><img src={ch.imageUrl} /></td>
             </tr>)}

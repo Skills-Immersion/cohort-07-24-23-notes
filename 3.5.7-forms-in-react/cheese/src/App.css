@@ -1,0 +1,12 @@
+* {
+  font-family: 'Dosis', sans-serif;
+}
+
+h1,
+h3 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+td {
+  border: 1px solid black;
+}

@@ -4,6 +4,7 @@
 // step 3: export default
 
 import React, { useState } from 'react';
+import HelloForm from './HelloForm';
 
 // the 3 things an event listener needs
 // 1. Which element am I listening for an event on?
@@ -32,6 +33,7 @@ function Header({ factAboutCheese, someOtherString, numberOfClicks, setNumberOfC
     <p onMouseOver={handleMouseOver}>
       2 + {numberOfClicks} is {2 + numberOfClicks}
     </p>
+    <HelloForm />
   </header>
 }
 

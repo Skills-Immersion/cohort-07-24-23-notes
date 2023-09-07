@@ -3,6 +3,7 @@ import Header from './Header';
 import './App.css';
 import Cheese from './Cheese';
 import { useState } from 'react';
+import AddCheeseForm from './AddCheeseForm';
 
 function App() {
   let factAboutCheese = 'cheese is the best';
@@ -31,14 +32,10 @@ function App() {
     },
   ]);
 
-  function addACheese() {
+  function addACheese(newCheese) {
     console.log('we are adding a cheese');
     // note: .push is not going to work
-    let newCheeses = [...cheesesArray, {
-      name: 'manchego',
-      imageUrl: 'https://images.squarespace-cdn.com/content/v1/58d5711a9f7456928cbaf420/1529692740910-4D47P1844VI8SAWTY61Y/Image+%5BSquare%5D.jpg',
-      deliciousness: 9
-    }];
+    let newCheeses = [...cheesesArray, newCheese];
     setCheesesArray(newCheeses);
     // cheesesArray.push({
     //   name: 'manchego',
@@ -73,7 +70,7 @@ function App() {
         setNumberOfClicks={setNumberOfClicks}
       />
       <main className="main">
-        <button onClick={addACheese}>Add a Cheese</button>
+        <AddCheeseForm addACheese={addACheese}/>
         <h3>Our Cheeses</h3>
         <ul>
           {/* {cheesesLIs} */}

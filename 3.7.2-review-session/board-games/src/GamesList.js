@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import Game from './Game';
+import SearchForm from './SearchForm';
+import AddBoardGameForm from './AddBoardGameForm';
 
 function GamesList() {
+
+  // search term will be updated by the form component
+  // and we use it below to filter what's displayed
+  const [searchTerm, setSearchTerm] = useState('');
   const [gamesArray, setGamesArray] = useState([
     {
       "name": "Sorry!",
@@ -25,8 +31,18 @@ function GamesList() {
     }
 
   ])
+
+  // helper function to add a new game (used by the form)
+  function addGame(newGame) {
+    setGamesArray([...gamesArray, newGame])
+  }
   return <div>
-    {gamesArray.map(g => <Game key={g.name} gameData={g} />)}
+    <AddBoardGameForm addGame={addGame} />
+    <SearchForm setSearchTerm={setSearchTerm} />
+    {/* the search magic: filter our list of games, then render whatever's left to the page with a map */}
+    {gamesArray
+      .filter(g => g.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      .map(g => <Game key={g.name} gameData={g} />)}
   </div>
 }
 

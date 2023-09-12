@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
 import './App.css';
 import Show from './Show';
 import ShowsList from './ShowsList';
+import { Link, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import ShowDetail from './ShowDetail';
 
 function App() {
 
@@ -55,11 +58,30 @@ function App() {
 
 
   return (
-    <div className="container">
-      <h1 onClick={() => setClicks(clicks + 1)}>TV Showy {clicks}</h1>
-      <h4>the finest app for finding information about TV shows</h4>
-      <ShowsList shows={tvShowsArray} />
-    </div>
+    <Router>
+      <div className="container">
+        <Link to="/">
+          <h1 onClick={() => setClicks(clicks + 1)}>TV Showy {clicks}</h1>
+        </Link>
+        <h4>the finest app for finding information about TV shows</h4>
+        {/* switch ensures that only one of the routes will get rendered - specifically, the first one where the path matches */}
+        {/* this allows us to have a "not found" catchall route - if none of the others matched, say "not found" */}
+        <Switch>
+          <Route path="/" exact>
+            <ShowsList shows={tvShowsArray} />
+          </Route>
+          <Route path="/potato">
+            secrets!
+          </Route>
+          <Route path="/shows/:id">
+            <ShowDetail />
+          </Route>
+          <Route>
+            Page Not Found
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

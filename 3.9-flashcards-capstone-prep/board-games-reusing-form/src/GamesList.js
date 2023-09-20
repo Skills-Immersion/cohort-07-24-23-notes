@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Game from './Game';
 import SearchForm from './SearchForm';
-import AddBoardGameForm from './AddBoardGameForm';
+import BoardGameForm from './BoardGameForm';
 
 function GamesList() {
 
@@ -33,15 +33,21 @@ function GamesList() {
       body: JSON.stringify({ data: newGame })
       // and then, after the request is done, we want to re-fetch all the data
     }).then(fetchAllGames);
-
   }
   return <div>
-    <AddBoardGameForm addGame={addGame} />
+    <BoardGameForm 
+      onSubmit={addGame} 
+      submitButtonText="Add Game"
+      initialFormData={ {
+        name: '',
+        imageUrl: '',
+        summary: ''
+      } }/>
     <SearchForm setSearchTerm={setSearchTerm} />
     {/* the search magic: filter our list of games, then render whatever's left to the page with a map */}
     {gamesArray
       .filter(g => g.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      .map(g => <Game key={g.name} gameData={g} />)}
+      .map(g => <Game key={g.name} gameData={g} REACT_APP_API_URL={REACT_APP_API_URL} fetchAllGames={fetchAllGames} />)}
   </div>
 }
 

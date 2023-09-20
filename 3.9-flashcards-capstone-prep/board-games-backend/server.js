@@ -57,6 +57,22 @@ app.get('/games/:id', (req, res, next) => {
   }
 })
 
+app.put('/games/:id', (req, res, next) => {
+  let idx = games.findIndex(x => x.id === Number(req.params.id));
+  if (idx >= 0) {
+    let newGame = {
+      id: Number(req.params.id),
+      name: req.body.data.name,
+      imageUrl: req.body.data.imageUrl,
+      summary: req.body.data.summary
+    }
+    games[idx] = newGame;
+    res.send(newGame);
+  } else {
+    res.status(404).send(`game not found with id ${req.params.id}`)
+  }
+})
+
 app.delete('/games/:id', (req, res, next) => {
   let idx = games.findIndex(x => x.id === Number(req.params.id));
   if (idx >= 0) {

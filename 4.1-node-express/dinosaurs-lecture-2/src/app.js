@@ -25,12 +25,48 @@ app.get('/', (req, res, next) => {
 // a route to send back the current date and time
 app.get('/whatdayisit', (req, res, next) => {
   // send back what day it is
-  res.send(`today is ${new Date()}`)
+  let day = new Date();
+  res.send(`today is ${dayy}`)
 })
 
 // a route to be greeted by a dinosaur
+// this route will use a query parameter
+// with a key of "dino" to represent
+// the type of dino saying rawr
 app.get('/greeting', (req, res, next) => {
-  res.send('the dinosaur says "rawr"')
+  // query params are always inside of req.query
+  // req.query is an object that contains the key/value pairs from the request
+  // since the query params are optional, it is good behavior to put in default values, like 'dinosaur' and 'rawr'
+  if (!req.query.dino) {
+    // next with an argument goes into error handling
+    return next('You must include a dino query param')
+  }
+  const { dino = 'dinosaur', whatTheDinoSays = 'rawr' } = req.query;
+  res.send(`the ${dino} says "${whatTheDinoSays}"`)
+})
+
+// if this comes after the route below,
+// then it will never happen
+// and the trex will be angry that you invalidated it and it will eat you
+app.get('/is-dinosaur/trex', (req, res, next) => {
+  res.send('yes of course a trex is a dinosaur, please dont eat me')
+})
+
+app.get('/is-dinosaur/:maybeDino', (req, res, next) => {
+  // since maybeDino is a route param, it will be inside of req.params
+  // a dinosaur name represents a dinosaur if it ends with "aurus"
+  if (req.params.maybeDino.endsWith('aurus')) {
+    res.send(`yes, ${req.params.maybeDino} is a dinosaur`)
+  } else {
+    res.send(`no, ${req.params.maybeDino} is not a dinosaur`)
+  }
+})
+
+// this is an error handler middleware
+// because it has 4 params
+app.use((error, req, res, next) => {
+  console.log(error);
+  res.send(error);
 })
 
 // in import syntax, this would be

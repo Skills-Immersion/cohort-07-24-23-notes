@@ -54,32 +54,25 @@ app.get('/is-dinosaur/trex', (req, res, next) => {
 
 const dinosaurs = require('./data/dinosaurs');
 
-app.get('/is-dinosaur/:maybeDino', (req, res, next) => {
-  // since maybeDino is a route param, it will be inside of req.params
-  // a dinosaur name represents a dinosaur if there is a dinosaur with that name in our array of dinosaurs
-  // how to check if there is a dinosaur with that name in the array??
-  // could use a loop! for each dinosaur, check if it has the same name
-  // could use a filter! filter down to just dinosaurs with that name, and then check if there are any dinosaurs left
-  // could use some! check if there is a dinosaur that has that name
-  // could use find or findIndex! get back the dinosaur with that name
-
-  // using some... if there is some dinosaur whose name matches the param
-  if (dinosaurs.some(d => d.name.toLowerCase() === req.params.maybeDino.toLowerCase())) {
-    res.send(`yes, ${req.params.maybeDino} is a dinosaur`)
+// middleware function that figures out if a dinosaur exists with that name
+function checkIfDinoExists(req, res, next) {
+  if (dinosaurs.some(d => d.name.toLowerCase() === req.params.dino.toLowerCase())) {
+    // the dino does exist! we are in good shape
+    next();
   } else {
-    res.send(`no, ${req.params.maybeDino} is not a dinosaur`)
+    // the dino does not exist! life is sad and we need to go into error handling
+    next(`could not find a dinosaur with the name ${req.params.dino}`);
   }
+}
+app.get('/is-dinosaur/:dino', checkIfDinoExists, (req, res, next) => {
+  res.send(`yes, ${req.params.dino} is a dinosaur`)
 })
 
-app.get('/dinosaurs/:dino', (req, res, next) => {
+app.get('/dinosaurs/:dino', checkIfDinoExists, (req, res, next) => {
   // dino route param should contain the name of a dinosaur
   // send back the info about that dinosaur from our array
   const dinosaur = dinosaurs.find(d => d.name.toLowerCase() === req.params.dino.toLowerCase());
-  if (dinosaur) {
-    res.send(dinosaur);
-  } else {
-    next(`could not find a dinosaur with the name ${req.params.dino}`)
-  }
+  res.send(dinosaur);
 })
 
 // this is an error handler middleware

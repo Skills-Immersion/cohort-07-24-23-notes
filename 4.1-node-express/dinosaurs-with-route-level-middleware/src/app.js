@@ -26,11 +26,11 @@ app.use((req, res, next) => {
 // what to do/what to send in the response?
 app.get('/', (req, res, next) => {
   // responsive middleware: it sends a response
-  res.semd('this is the root route of our dinosaurs app! we LOVE dinosaurs very very much')
+  res.send('this is the root route of our dinosaurs app! we LOVE dinosaurs very very much')
 })
 
 // a route to send back the current date and time
-app.get('/whatdayisit', (res, req, next) => {
+app.get('/whatdayisit', (req, res, next) => {
   // send back what day it is
   let day = new Date();
   res.send(`today is ${day}`)
@@ -44,7 +44,7 @@ app.get('/greeting', (req, res, next) => {
   // query params are always inside of req.query
   // req.query is an object that contains the key/value pairs from the request
   // since the query params are optional, it is good behavior to put in default values, like 'dinosaur' and 'rawr'
-  if (!req.params.dino) {
+  if (!req.query.dino) {
     // next with an argument goes into error handling
     return next('You must include a dino query param')
   }
@@ -72,7 +72,7 @@ function checkIfDinoExists(req, res, next) {
   }
 }
 app.get('/is-dinosaur/:dino', checkIfDinoExists, (req, res, next) => {
-  res.send(`yes, ${req.query.dino} is a dinosaur`)
+  res.send(`yes, ${req.params.dino} is a dinosaur`)
 })
 
 app.get('/dinosaurs/:dino', checkIfDinoExists, (req, res, next) => {

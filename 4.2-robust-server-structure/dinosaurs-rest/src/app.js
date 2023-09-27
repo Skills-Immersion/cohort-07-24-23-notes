@@ -104,6 +104,16 @@ app.get('/dinosaurs/:id', checkIfDinoExists, (req, res, next) => {
   res.send({ data: dinosaur });
 })
 
+// destroy route: delete one dinosaur by its ID
+app.delete('/dinosaurs/:id', checkIfDinoExists, (req, res, next) => {
+  // find the dinosaur
+  let dinosaurIndex = dinosaurs.findIndex(d => d.id === Number(req.params.id));
+  // remove the dinosaur from the array
+  dinosaurs.splice(dinosaurIndex, 1);
+  // send a 204 response
+  res.status(204).send();
+})
+
 // this is an error handler middleware
 // because it has 4 params
 app.use((error, req, res, next) => {

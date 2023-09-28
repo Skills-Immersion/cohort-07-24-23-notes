@@ -57,7 +57,10 @@ function validatorFor(property) {
     if (req.body.data[property]) {
       next();
     } else {
-      res.status(400).send(`request body must include ${property}`);
+      next({
+        status: 400,
+        message: `request body must include ${property}`
+      });
     }
   }
 }
@@ -92,7 +95,10 @@ function checkIfDinoExists(req, res, next) {
     next();
   } else {
     // the dino does not exist! life is sad and we need to go into error handling
-    next(`could not find a dinosaur with the id ${req.params.id}`);
+    next({
+      status: 404,
+      message: `could not find a dinosaur with the id ${req.params.id}`
+    });
   }
 }
 
@@ -117,8 +123,10 @@ app.delete('/dinosaurs/:id', checkIfDinoExists, (req, res, next) => {
 // this is an error handler middleware
 // because it has 4 params
 app.use((error, req, res, next) => {
+  // our error contains a status code (number) and a message (string)
+  let { status = 500, message = 'Internal Server Error' } = error;
   console.log(error);
-  res.send(error);
+  res.status(status).send({ error: message });
 })
 
 // in import syntax, this would be

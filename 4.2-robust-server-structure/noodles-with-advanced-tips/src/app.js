@@ -5,7 +5,6 @@ const noodleRouter = require('./noodles/noodles.router');
 const starchRouter = require('./starches/starches.router')
 const app = express();
 
-
 // middleware
 app.use(morgan('dev'));
 app.use(express.json());

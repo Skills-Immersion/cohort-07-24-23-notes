@@ -1,7 +1,7 @@
 // define handler functions and interact with the data storage
 const { createId } = require('@paralleldrive/cuid2')
-const { starches } = require('../data');
-const validatorFor = require('../utils/validatorFor.js');
+const { noodles, starches } = require('../data');
+const validatorFor = require('../middleware/validatorFor.js');
 
 function list(req, res, next) {
   res.send({ data: starches })
@@ -59,6 +59,13 @@ function destroy(req, res, next) {
   res.status(204).send();
 }
 
+// option 1 for nested routes: write the nested route explicitly
+function listNoodles(req, res, next) {
+  let { starchId } = req.params;
+  let filteredNoodles = noodles.filter(n => n.starchId === starchId);
+  res.send({ data: filteredNoodles })
+}
+
 module.exports = {
   list,
   create: [
@@ -67,5 +74,7 @@ module.exports = {
     create
   ],
   read: [validateStarchExists, read],
-  destroy: [validateStarchExists, destroy]
+  destroy: [validateStarchExists, destroy],
+  listNoodles: [validateStarchExists, listNoodles],
+  validateStarchExists
 }

@@ -1,4 +1,5 @@
 // app.js is for general app configuration and app-level middleware
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const noodleRouter = require('./noodles/noodles.router');
@@ -8,6 +9,7 @@ const app = express();
 // middleware
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(cors());
 
 // nice stuff here
 

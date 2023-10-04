@@ -93,3 +93,26 @@ SELECT item_name AS product, amount AS quantity FROM orders
 	WHERE total_cost < 600;
 
 
+-------- many to many time!
+
+-- remove the foreign key from the items table
+ALTER TABLE items DROP COLUMN supplier_id;
+
+-- create the intermediate table
+CREATE TABLE suppliers_items(
+	supplier_id INTEGER REFERENCES suppliers(id) NOT NULL,
+	item_id INTEGER REFERENCES items(id) NOT NULL,
+	PRIMARY KEY(supplier_id, item_id)
+);
+
+INSERT INTO suppliers_items(item_id, supplier_id) 
+	VALUES
+	(2,2),
+	(3,1),
+	(5,3),
+	(5,1),
+	(3,2);
+
+SELECT * FROM suppliers
+	JOIN suppliers_items ON suppliers.id = suppliers_items.supplier_id
+	JOIN items ON suppliers_items.item_id = items.id;

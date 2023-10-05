@@ -3,26 +3,19 @@ const { createId } = require('@paralleldrive/cuid2')
 const { noodles, starches } = require('../data');
 const validatorFor = require('../middleware/validatorFor.js');
 
+const knex = require('../db/connection');
+
 function list(req, res, next) {
-  // option 2: nesting the entire router
-  // now, this list function needs to send all the data sometimes,
-  // but only one specific starch's noodles other times
-  if (req.params.starchId) {
-    // we're in a nested route: filter down the noodles
-    let { starchId } = req.params;
-    let filteredNoodles = noodles.filter(n => n.starchId === starchId);
-    res.send({ data: filteredNoodles })
-  } else {
-    // not a nested route: send all the noodles
-    // step 1: include the name of each starch inside of the noodles
-    let starchyNoodles = noodles.map(
-      n => ({
-        ...n,
-        starch: starches.find(s => s.id === n.starchId).name
-      })
-    )
-    res.send({ data: starchyNoodles })
-  }
+
+  // not a nested route: send all the noodles
+  // res.send({ data: noodles })
+  // NEW! EXCITING! Get the noodle data from the database
+  knex('noodles')
+    .select('*')
+    .then(data => {
+      console.log('data from the database!', data)
+      res.send({ data: data })
+    })
 }
 
 function validateBodyExists(req, res, next) {
@@ -69,8 +62,12 @@ function validateNoodleExists(req, res, next) {
 }
 
 function read(req, res, next) {
-  const { noodle } = res.locals;
-  res.send({ data: noodle })
+  // grab the noodle by the id that is in the req params
+  knex('noodles')
+    .select('*')
+    .where('id', req.params.noodleId)
+    .then(noodles => res.send({ data: noodles[0] }))
+
 }
 
 function update(req, res, next) {
@@ -110,7 +107,7 @@ module.exports = {
     validatorFor('recommendations'),
     create
   ],
-  read: [validateNoodleExists, read],
+  read: [read],
   update: [
     validateNoodleExists,
     validateBodyExists,

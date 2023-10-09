@@ -1,10 +1,10 @@
 const articlesRouter = require("express").Router();
 const { list, create, read, update, destroy } = require("./articles.controller");
 
-articlesRouter.route(___).___(list);
-articlesRouter.route(___).___(create);
-articlesRouter.route(____).___(read);
-articlesRouter.route(____).___(update);
-articlesRouter.route(____).___(destroy);
+articlesRouter.route("/").get(list);
+articlesRouter.route("/").post(create);
+articlesRouter.route("/:article_id").get(read);
+articlesRouter.route("/:article_id").put(update);
+articlesRouter.route("/:article_id").delete(destroy);
 
 module.exports = articlesRouter;

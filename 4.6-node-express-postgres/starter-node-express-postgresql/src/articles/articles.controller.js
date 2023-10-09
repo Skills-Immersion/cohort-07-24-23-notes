@@ -4,31 +4,52 @@ const {
     readArticle,
     updateArticle,
     destroyArticle
-} = ___("./articles.service");
+} = require("./articles.service");
 
-async function list(___ , ___ , ___) {
-    let data = await ___();
-    ___.json({data});
+// try {
+//     async function list(req , res , _next) {
+//         let data = await getAllArticles();
+//         res.json({data});
+//     }
+//     async function read(req , res , _next) {
+//         let data = await getAllArticles();
+//         res.json({data});
+//     }
+//     async function update(req , res , _next) {
+//         let data = await getAllArticles();
+//         res.json({data});
+//     }
+//     async function destroy(req , res , _next) {
+//         let data = await getAllArticles();
+//         res.json({data});
+//     }
+// } catch (error) {
+//     console.log(error);
+// }
+
+async function list(req , res , _next) {
+    let data = await getAllArticles();
+    res.json({data});
 }
 
-async function create(___ , ___ , ___) {
-    let data = await ___(___.___);
-    ___.json({data});
+async function create(req , res , _next) {
+    let data = await createArticle(req.body);
+    res.json({data});
 }
 
-async function destroy(___ , ___ , ___) {
-    let data = await ___(___.___._______);
-    ___.json({data});
+async function destroy(req , res , _next) {
+    let data = await destroyArticle(req.params.article_id);
+    res.json({data});
 }
 
-async function update(___ , ___ , ___) {
-    let data = await ___(___.___._______, ___.___);
-    ___.json({data});
+async function update(req , res , _next) {
+    let data = await updateArticle(req.params.article_id, req.body);
+    res.json({data});
 }
 
-async function read(___ , ___ , ___) {
-    let data = await ___(___.___._______);
-    ___.json({data});
+async function read(req , res , _next) {
+    let data = await readArticle(req.params.article_id);
+    res.json({data});
 }
 
 module.exports = {

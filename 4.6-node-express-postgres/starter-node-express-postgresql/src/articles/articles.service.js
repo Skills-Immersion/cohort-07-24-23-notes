@@ -8,7 +8,10 @@ function createArticle(newArticle) {
     return db("articles")
         .insert(newArticle)
         .returning("*")
-        .then(rows => rows[0]);
+        .then(rows => {
+            console.log(rows);
+            return rows[0]
+        });
 }
 
 function readArticle(article_id) {
@@ -17,9 +20,9 @@ function readArticle(article_id) {
         .first(); // Ensures that we get a single article object, not an array.
 }
 
-function destroyArticle(article_id) {
+function destroyArticle(articleId) {
     return db("articles")
-        .where({ article_id })
+        .where("article_id", articleId)
         .delete();
 }
 
@@ -37,3 +40,5 @@ module.exports = {
     destroyArticle,
     updateArticle
 };
+
+

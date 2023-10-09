@@ -6,3 +6,6 @@ router.route("/").get(controller.list).all(methodNotAllowed);
 router.route("/:categoryId").all(methodNotAllowed);
 
 module.exports = router;
+
+
+

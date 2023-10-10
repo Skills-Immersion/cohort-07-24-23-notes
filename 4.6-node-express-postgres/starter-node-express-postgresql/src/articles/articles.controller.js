@@ -6,26 +6,9 @@ const {
     destroyArticle
 } = require("./articles.service");
 
-// try {
-//     async function list(req , res , _next) {
-//         let data = await getAllArticles();
-//         res.json({data});
-//     }
-//     async function read(req , res , _next) {
-//         let data = await getAllArticles();
-//         res.json({data});
-//     }
-//     async function update(req , res , _next) {
-//         let data = await getAllArticles();
-//         res.json({data});
-//     }
-//     async function destroy(req , res , _next) {
-//         let data = await getAllArticles();
-//         res.json({data});
-//     }
-// } catch (error) {
-//     console.log(error);
-// }
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+
+// const wrappedList = asyncErrorBoundary(list)
 
 async function list(req , res , _next) {
     let data = await getAllArticles();
@@ -53,9 +36,9 @@ async function read(req , res , _next) {
 }
 
 module.exports = {
-    list,
-    create,
-    read,
-    update,
-    destroy
+    list: asyncErrorBoundary(list),
+    create: asyncErrorBoundary(create),
+    read: asyncErrorBoundary(read),
+    update: asyncErrorBoundary(update),
+    destroy: asyncErrorBoundary(destroy)
 }

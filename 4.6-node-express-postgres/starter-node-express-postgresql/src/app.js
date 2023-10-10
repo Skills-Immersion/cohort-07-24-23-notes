@@ -8,7 +8,7 @@ const articlesRouter = require("./articles/articles.router");
 app.use(express.json());
 
 app.use("/articles", articlesRouter)
-app.use("/products", productsRouter);
+// app.use("/products", productsRouter);
 app.use("/categories", categoriesRouter);
 app.use("/suppliers", suppliersRouter);
 

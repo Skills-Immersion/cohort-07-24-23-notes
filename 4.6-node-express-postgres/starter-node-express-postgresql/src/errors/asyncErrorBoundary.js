@@ -16,36 +16,36 @@ function asyncErrorBoundary(delegate, defaultStatus) {
 // returns a middleware function
 //      kicks of a promise chain (we want the catch)
 
-function asyncErrorBoundary(delegate, defaultStatus) {
-    return (request, response, next) => {
-        (async () => {
-            try {
-                await delegate(req, res, next)
-            } catch (error) {
-                const { status = defaultStatus, message = error } = error;
-                next({
-                    status,
-                    message,
-                });
-            }
-        })();
-    }
-}
+// function asyncErrorBoundary(delegate, defaultStatus) {
+//     return (request, response, next) => {
+//         (async () => {
+//             try {
+//                 await delegate(req, res, next)
+//             } catch (error) {
+//                 const { status = defaultStatus, message = error } = error;
+//                 next({
+//                     status,
+//                     message,
+//                 });
+//             }
+//         })();
+//     }
+// }
 
 
-function asyncErrorBoundary(delegate, defaultStatus) { 
-    Promise.resolve()
-    return (request, response, next) => {  
-            .then(() => delegate(request, response, next))
-            .catch((error = {}) => {
-                const { status = defaultStatus, message = error } = error;
-                next({
-                    status,
-                    message,
-                });
-            });
-    };
-}
+// function asyncErrorBoundary(delegate, defaultStatus) { 
+//     Promise.resolve()
+//     return (request, response, next) => {  
+//             .then(() => delegate(request, response, next))
+//             .catch((error = {}) => {
+//                 const { status = defaultStatus, message = error } = error;
+//                 next({
+//                     status,
+//                     message,
+//                 });
+//             });
+//     };
+// }
 
 // function asyncErrorBoundary(delegate, defaultStatus) {
 //     return async (request, response, next) => {

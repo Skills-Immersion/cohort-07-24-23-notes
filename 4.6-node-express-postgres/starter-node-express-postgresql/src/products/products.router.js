@@ -4,7 +4,7 @@ const { list, listOutOfStockCount, listPriceSummary, read } = require("./product
 router.route("/").get(list);
 router.route("/out-of-stock-count").get(listOutOfStockCount);
 router.route("/price-summary").get(listPriceSummary);
-router.route("/:productId").get(read);
+// router.route("/:productId").get(read);
 
 
 module.exports = router;

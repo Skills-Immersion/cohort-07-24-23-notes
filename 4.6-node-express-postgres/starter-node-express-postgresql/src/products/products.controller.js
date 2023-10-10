@@ -2,7 +2,7 @@ const {
   listAll, 
   listOutOfStockCountService, 
   listPriceSummaryService, 
-  readService
+  // readService
 } = require("./products.service");
 
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
@@ -14,11 +14,11 @@ async function list(req, res, _next) {
 }
 
 
-async function read(req, res, _next) {
-  const { productId } = req.params;
-  const data = await readService(productId); // test with await readService(productId) in res.json
-  res.json({data});
-}
+// async function read(req, res, _next) {
+//   const { productId } = req.params;
+//   const data = await readService(productId); // test with await readService(productId) in res.json
+//   res.json({data});
+// }
 
 
 async function listOutOfStockCount(req, res, _next) {
@@ -34,7 +34,7 @@ async function listPriceSummary(req, res, _next) {
 
 module.exports = {
     list: asyncErrorBoundary(list),
-    read: asyncErrorBoundary(read),
     listOutOfStockCount: asyncErrorBoundary(listOutOfStockCount),
     listPriceSummary: asyncErrorBoundary(listPriceSummary),
+    //read: asyncErrorBoundary(read),
 };

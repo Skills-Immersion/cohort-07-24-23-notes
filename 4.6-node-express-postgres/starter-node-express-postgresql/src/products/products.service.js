@@ -1,5 +1,11 @@
 const knex = require("../db/connection");
-const { transformPriceToNumber } = require("../utils/mapProperties")
+const { transformPriceToNumber, mapProperties } = require("../utils/mapProperties")
+
+const addSupplier = mapProperties({
+    supplier_id: "supplier.supplier_id",
+    supplier_name: "supplier.supplier_name",
+    supplier_city:  "supplier.supplier_city"
+});
 
 function listAll() {
     // SELECT * FROM products
@@ -25,8 +31,20 @@ function listPriceSummaryService() {
         .then( resultArray => resultArray.map(transformPriceToNumber))
 }
 
+
+function readService(product_id) {
+    // SELECT * FROM products JOIN suppliers ON products.supplier_id = suppliers.supplier_id WHERE products.product_id = products.product_id
+    return knex("products")
+        .select("*")
+        .join("suppliers", "products.supplier_id", "suppliers.supplier_id" )
+        .where({product_id})
+        .first()
+        .then(addSupplier)
+}
+
 module.exports = {
     listAll,
     listOutOfStockCountService,
-    listPriceSummaryService
+    listPriceSummaryService,
+    readService
 }

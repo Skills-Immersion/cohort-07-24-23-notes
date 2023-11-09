@@ -132,7 +132,74 @@ class BST {
         }
     }
 
+    //pre order we push the root node first
+    dfsPreOrder(values = []) {
+        //process
+        values.push(this.value);
+        //step left recursively
+        if (this.left) {
+            this.left.dfsPreOrder(values);
+        }
+        //step right recursively
+        if (this.right) {
+            this.right.dfsPreOrder(values);
+        }
+        return values
+    }
 
+    //post order we push the root node at the end
+    dfsPostOrder(values = []) {
+        //step left recursively
+        if (this.left) {
+            this.left.dfsPostOrder(values);
+        }
+        //step right recursively
+        if (this.right) {
+            this.right.dfsPostOrder(values);
+        }
+        //process
+        values.push(this.value);
+        return values
+    }
+
+    //traversal that gives us our tree sorted
+    dfsInOrder(values = []) {
+        //step left recursively
+        if (this.left) {
+            this.left.dfsInOrder(values);
+        }
+        //process
+        values.push(this.value);
+        //step right recursively
+        if (this.right) {
+            this.right.dfsInOrder(values);
+        }
+        return values
+    }
+
+    breadtFirstSearch(values = []) {
+        //initialize the Queue
+        const queue = new Queue();
+        queue.enqueue(this)// put the root node into the Q
+        let nodeToBechecked = this;
+
+
+        while ( nodeToBechecked ) {
+            // traverse
+            values.push(nodeToBechecked.value);
+            // check the left child and put it in Queue
+            if ( nodeToBechecked.left ) {
+                queue.enqueue(nodeToBechecked.left)
+            }
+            // check the right child and put it in Queue
+            if ( nodeToBechecked.right ) {
+                queue.enqueue(nodeToBechecked.right)
+            }
+            // move on to the next node
+            nodeToBechecked = queue.dequeue();
+        }
+        return values;
+    }
 }
 
 let bst = new BST()

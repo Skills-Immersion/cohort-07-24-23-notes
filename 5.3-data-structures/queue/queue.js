@@ -82,3 +82,5 @@ class Queue {
 let q = new Queue()
 q.enqueue(21).enqueue(7).enqueue(11)
 console.log(q);
+
+module.exports = Queue
